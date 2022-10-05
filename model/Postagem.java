@@ -6,30 +6,48 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity //criar um entidade, tabela
-@Table(name = "tb_postagem") //cria nome da tabela
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+
+@Entity 
+@Table(name = "tb_postagem") 
 public class Postagem {
 	
-	@Id //vai ser a chave primaria
-	@GeneratedValue(strategy = GenerationType.IDENTITY)//Auto incremente 
-	private Long id;// vai criar a varivel, e long vira bigint
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	private Long id;
 	
-	@NotBlank //quando é obrigatorio o usuario preencher o campo
-	@Size(min = 5, max =50) //limitar quantidade de caracteres
+	@NotBlank (message = "O atributo título é obrigatório!")
+	@Size(min = 5, max =100)
 	private String titulo;
 	
-	@NotBlank 
+	@NotBlank (message = "O atributo texto é obrigatório!")
 	@Size(min = 5, max =1000)
 	private String texto;
 	
 	@UpdateTimestamp
 	private LocalDateTime data;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
+	
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
 
 	public Long getId() {
 		return id;

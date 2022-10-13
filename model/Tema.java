@@ -15,15 +15,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
-@Entity
-@Table(name = "tb_temas")
+@Entity //criar uma entidade
+@Table(name = "tb_temas") //criar tabela no banco de dados com esse nome
 public class Tema {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id //vai transformar a variavel em um id, chave primaria
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //generationtype para ser auto increment
 	private Long id;
 	
-	@NotNull(message = "O atributo descrição é obrigatório")
+	@NotNull(message = "O atributo descrição é obrigatório") //notnull para 
 	private String descricao;
 	
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)

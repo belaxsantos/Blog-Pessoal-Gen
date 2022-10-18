@@ -39,6 +39,26 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario" , cascade = CascadeType.REMOVE)//mappedBy referencia da chave estrangeira
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
+	
+	
+	//construtores, para instanciar objetos
+	public Usuario(Long id, String nome, String usuario, String senha,String foto) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+		
+	}
+	
+	//construtor vazio, para evitar erro de informação nula
+	public Usuario() {
+		super();
+		
+	}
+
+
 
 	public Long getId() {
 		return id;
